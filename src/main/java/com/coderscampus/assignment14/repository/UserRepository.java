@@ -9,11 +9,11 @@ import java.util.TreeSet;
 
 @Repository
 public class UserRepository {
-    private Set<User> users = new TreeSet<>();
+    private final Set<User> users = new TreeSet<>();
 
     public User saveUser(User user) {
-        if (users.size() == 0) {
-            user.setId(String.valueOf(1L));
+        if (users.isEmpty()) {
+            user.setId(1L);
 
         } else {
             User lastUser = ((TreeSet<User>) users).last();

@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class User implements Comparable<User> {
 
-    private String id;
+    private Long id;
     private String name;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Channels</title>
+	<title th:text="${channel.name}"></title>
 </head>
 <body>
 	<div>
-		<label for="chatBox"></label><textarea cols="30" id="chatBox" name="chatBox" rows="10"></textarea>
-		<script src="/js/channel.js" type="text/javascript"></script>
+		<div th:each="message:${messages}" th:inline="text">
+
+			<p>[[${message.user.name}]]</p>
+			<p>[[${message.text}]]</p>
+		</div>
 	</div>
+	<div>
+
+		<label for="chatBox"></label><textarea cols="30" id="chatBox" name="chatBox" rows="10"></textarea>
+	</div>
+	<script src="/js/channel.js" type="text/javascript"></script>
+
 </body>
 </html>

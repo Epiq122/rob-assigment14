@@ -2,7 +2,7 @@ package com.coderscampus.assignment14.domain;
 
 public class Channel {
     private Long channelId;
-    private String name;
+    private String channelName;
 
     public Long getChannelId() {
         return channelId;
@@ -13,10 +13,16 @@ public class Channel {
     }
 
     public String getName() {
-        return name;
+        return channelName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getChannelName() {
+        return channelName;
     }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
+
+
 }
