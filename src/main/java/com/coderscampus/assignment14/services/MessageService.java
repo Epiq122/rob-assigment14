@@ -27,8 +27,8 @@ public class MessageService {
         return messageRepository.findByChannelId(channelId).orElse(new ArrayList<>());
     }
 
-    public Message createMessage(Message message) {
-        Optional<Channel> channel = channelRepository.findById(message.getChannelId());
+    public Message createMessage(Long channelId, Message message) {
+        Optional<Channel> channel = Optional.ofNullable(channelRepository.findById(message.getChannelId()));
         if (channel.isPresent()) {
             List<Message> messagesByChannel = getMessagesByChannelId(message.getChannelId());
             messagesByChannel.add(message);

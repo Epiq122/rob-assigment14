@@ -4,31 +4,26 @@ import com.coderscampus.assignment14.domain.Channel;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
 
 @Repository
 public class ChannelRepository {
 
-    private List<Channel> channels = new ArrayList<>();
-
+    private HashMap<Long, Channel> channelHashMap = new HashMap<>();
 
     public ChannelRepository() {
-        Channel general = new Channel();
-        general.setChannelId(1L);
-        general.setChannelName("General");
-        channels.add(general);
+        Long channelId = 1L;
+        Channel channel = new Channel();
+        channel.setChannelId(channelId);
+        channel.setChannelName("General");
+        channelHashMap.put(channelId, channel);
     }
 
-    public Optional<Channel> findById(Long channelId) {
-        return channels.stream()
-                       .filter(channel -> channel.getChannelId().equals(channelId))
-                       .findAny();
+    public Channel findById(Long channelId) {
+        return channelHashMap.get(channelId);
     }
 
-    public List<Channel> findAll() {
-        return channels;
+    public Iterable<Channel> findAll() {
+        return new ArrayList<>(this.channelHashMap.values());
     }
-
-
 }

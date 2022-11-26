@@ -1,8 +1,15 @@
 package com.coderscampus.assignment14.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Channel {
     private Long channelId;
     private String channelName;
+    private List<Message> messages = new ArrayList<>();
+
+    public Channel() {
+    }
 
     public Long getChannelId() {
         return channelId;
@@ -25,4 +32,11 @@ public class Channel {
     }
 
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }

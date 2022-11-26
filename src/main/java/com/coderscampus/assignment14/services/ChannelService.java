@@ -2,7 +2,9 @@ package com.coderscampus.assignment14.services;
 
 
 import com.coderscampus.assignment14.domain.Channel;
+import com.coderscampus.assignment14.domain.Message;
 import com.coderscampus.assignment14.repository.ChannelRepository;
+import com.coderscampus.assignment14.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,20 @@ import java.util.List;
 public class ChannelService {
     @Autowired
     private ChannelRepository channelRepository;
+    @Autowired
+    private MessageRepository messageRepository;
+
+    public void saveMessage(Long channelId, Message message) {
+        channelRepository.findById(channelId).getMessages().add(message);
+    }
 
     public Channel findById(Long channelId) {
-        return channelRepository.findById(channelId).orElse(new Channel());
+        return channelRepository.findById(channelId);
+
     }
 
     public List<Channel> findAll() {
-        return channelRepository.findAll();
+        return (List<Channel>) channelRepository.findAll();
     }
 
 

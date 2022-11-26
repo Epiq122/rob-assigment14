@@ -1,12 +1,29 @@
 package com.coderscampus.assignment14.domain;
 
-import java.time.LocalDateTime;
-
 public class Message {
+    private String sender;
+    private String body;
     private Long channelId;
-    private String text;
-    private LocalDateTime createDate;
-    private User user;
+
+    public Message() {
+        // TODO document why this constructor is empty
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 
     public Long getChannelId() {
         return channelId;
@@ -16,27 +33,8 @@ public class Message {
         this.channelId = channelId;
     }
 
-    public String getMessage() {
-        return text;
-    }
-
-    public void setMessage(String text) {
-        this.text = text;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public String toString() {
+        return "Message [sender=" + sender + ", body=" + body + ", channelId=" + channelId + "]";
     }
 }
