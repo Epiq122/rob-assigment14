@@ -19,10 +19,6 @@ public class Channel {
         this.channelId = channelId;
     }
 
-    public String getName() {
-        return channelName;
-    }
-
     public String getChannelName() {
         return channelName;
     }
@@ -30,7 +26,6 @@ public class Channel {
     public void setChannelName(String channelName) {
         this.channelName = channelName;
     }
-
 
     public List<Message> getMessages() {
         return messages;

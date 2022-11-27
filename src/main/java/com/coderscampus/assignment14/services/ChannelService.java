@@ -14,22 +14,19 @@ import java.util.List;
 public class ChannelService {
     @Autowired
     private ChannelRepository channelRepository;
+
     @Autowired
     private MessageRepository messageRepository;
 
+    public List<Channel> findAll() {
+        return this.channelRepository.findAll();
+    }
 
     public Channel findById(Long channelId) {
-        return channelRepository.findById(channelId);
-
+        return this.channelRepository.findById(channelId);
     }
-
-    public List<Channel> findAll() {
-        return (List<Channel>) channelRepository.findAll();
-    }
-
 
     public void saveMessage(Long channelId, Message message) {
-        channelRepository.findById(channelId).getMessages().add(message);
+        this.channelRepository.findById(channelId).getMessages().add(message);
     }
-
 }

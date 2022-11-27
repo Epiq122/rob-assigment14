@@ -1,45 +1,27 @@
 package com.coderscampus.assignment14.domain;
 
-import java.util.Objects;
+public class User {
+    private Long userId;
+    private String username;
 
-public class User implements Comparable<User> {
-
-    private Long id;
-    private String name;
-
-    public Long getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUsername() {
+        return username;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name);
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 
-    @Override
-    public int compareTo(User u) {
-        if (this.id == null)
-            return 1;
-        return this.id.compareTo(u.id);
-    }
 }

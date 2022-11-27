@@ -5,25 +5,25 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class ChannelRepository {
-
-    private HashMap<Long, Channel> channelHashMap = new HashMap<>();
+    private final HashMap<Long, Channel> channelMap = new HashMap<Long, Channel>();
 
     public ChannelRepository() {
         Long channelId = 1L;
         Channel channel = new Channel();
         channel.setChannelId(channelId);
         channel.setChannelName("General");
-        channelHashMap.put(channelId, channel);
+        this.channelMap.put(channelId, channel);
     }
 
     public Channel findById(Long channelId) {
-        return channelHashMap.get(channelId);
+        return this.channelMap.get(channelId);
     }
 
-    public Iterable<Channel> findAll() {
-        return new ArrayList<>(this.channelHashMap.values());
+    public List<Channel> findAll() {
+        return new ArrayList<>(this.channelMap.values());
     }
 }

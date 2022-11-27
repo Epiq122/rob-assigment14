@@ -1,34 +1,41 @@
 package com.coderscampus.assignment14.domain;
 
+
 public class Message {
-    private String message;
-    private Long messageId;
-    private User user;
+    private String sender;
+    private String body;
+    private Long channelId;
 
-
-    public String getMessage() {
-        return message;
+    public Message() {
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getSender() {
+        return sender;
     }
 
-    public Long getMessageId() {
-        return messageId;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
+    public String getBody() {
+        return body;
     }
 
-    public User getUser() {
-        return user;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Long getChannelId() {
+        return channelId;
     }
 
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    @Override
+    public String toString() {
+        return "Message [sender=" + sender + ", body=" + body + ", channelId=" + channelId + "]";
+    }
 
 }
