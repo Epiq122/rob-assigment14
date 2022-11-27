@@ -1,40 +1,34 @@
 package com.coderscampus.assignment14.domain;
 
 public class Message {
-    private String sender;
-    private String body;
-    private Long channelId;
+    private String message;
+    private Long messageId;
+    private User user;
 
-    public Message() {
-        // TODO document why this constructor is empty
+
+    public String getMessage() {
+        return message;
     }
 
-    public String getSender() {
-        return sender;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public Long getMessageId() {
+        return messageId;
     }
 
-    public String getBody() {
-        return body;
+    public void setMessageId(Long messageId) {
+        this.messageId = messageId;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public User getUser() {
+        return user;
     }
 
-    public Long getChannelId() {
-        return channelId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
-    }
 
-    @Override
-    public String toString() {
-        return "Message [sender=" + sender + ", body=" + body + ", channelId=" + channelId + "]";
-    }
 }

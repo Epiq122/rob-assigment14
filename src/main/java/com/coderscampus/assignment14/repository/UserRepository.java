@@ -24,4 +24,13 @@ public class UserRepository {
         return user;
 
     }
+
+    public User findById(Long userId) {
+        for (User user : users) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

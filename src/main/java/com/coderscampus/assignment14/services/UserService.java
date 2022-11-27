@@ -10,7 +10,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-   
+
     public User createUser(String name) {
         User user = new User();
         user.setName(name);
@@ -18,5 +18,8 @@ public class UserService {
         return userRepository.saveUser(user);
     }
 
+    public User findByUserId(Long userId) {
+        return userRepository.findById(userId);
+    }
 
 }

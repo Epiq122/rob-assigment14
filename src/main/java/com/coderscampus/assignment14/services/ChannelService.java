@@ -17,9 +17,6 @@ public class ChannelService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public void saveMessage(Long channelId, Message message) {
-        channelRepository.findById(channelId).getMessages().add(message);
-    }
 
     public Channel findById(Long channelId) {
         return channelRepository.findById(channelId);
@@ -30,5 +27,9 @@ public class ChannelService {
         return (List<Channel>) channelRepository.findAll();
     }
 
+
+    public void saveMessage(Long channelId, Message message) {
+        channelRepository.findById(channelId).getMessages().add(message);
+    }
 
 }
