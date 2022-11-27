@@ -33,9 +33,5 @@ public class Message {
         this.channelId = channelId;
     }
 
-    @Override
-    public String toString() {
-        return "Message [sender=" + sender + ", body=" + body + ", channelId=" + channelId + "]";
-    }
-
+  
 }

@@ -44,5 +44,6 @@ public class ChannelController {
         this.channelService.saveMessage(channelId, message);
         return this.channelService.findById(channelId).getMessages();
     }
+
 }
 

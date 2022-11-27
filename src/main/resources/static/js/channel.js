@@ -15,10 +15,25 @@ function initialSetup() {
 
 initialSetup();
 
+function createMessageElements() {
+    const messageDiv = document.createElement("div");
+    messageDiv.setAttribute("class", "message");
+    const boldText = document.createElement("b");
+    boldText.setAttribute("class", "sender");
+    boldText.innerHTML = `${item.sender}: `;
+    const span = document.createElement("span");
+    span.setAttribute("class", "body");
+    span.innerHTML = `${item.body}`;
+    messageDiv.appendChild(boldText);
+    messageDiv.appendChild(span);
+    document.querySelector("#messages").appendChild(messageDiv);
 
-textarea.onkeypress = event => {
+}
+
+
+const sendMessage = textarea.onkeyup = event => {
     const keyCode = event.keyCode
-    if (keyCode === 13) {
+    if (keyCode === "enter" || keyCode === "13") {
         const username = sessionStorage.getItem("username");
         const messageBody = textarea.value;
         textarea.value = "";
@@ -40,45 +55,9 @@ textarea.onkeypress = event => {
                 document.querySelector("#messages").innerHTML = ``;
 
                 for (const item of data) {
-                    const messageDiv = document.createElement("div");
-                    messageDiv.setAttribute("class", "message");
-                    const senderBold = document.createElement("b");
-                    senderBold.setAttribute("class", "sender");
-                    senderBold.innerHTML = `${item.sender}: `;
-                    const bodySpan = document.createElement("span");
-                    bodySpan.setAttribute("class", "body");
-                    bodySpan.innerHTML = `${item.body}`;
-                    messageDiv.appendChild(senderBold);
-                    messageDiv.appendChild(bodySpan);
-                    document.querySelector("#messages").appendChild(messageDiv);
+                    createMessageElements();
                 }
             });
     }
 }
-
-
-function getMessages() {
-    fetch(`/channels/${channelId}/messages`)
-        .then(response => response.json())
-        .then(data => {
-            document.querySelector("#messages").innerHTML = "";
-            for (let i = 0; i < data.length; i++) {
-                const messageDiv = document.createElement("div");
-                messageDiv.setAttribute("class", "message");
-                const senderBold = document.createElement("b");
-                senderBold.setAttribute("class", "sender");
-                senderBold.innerHTML = `${data[i].sender}: `;
-                const bodySpan = document.createElement("span");
-                bodySpan.setAttribute("class", "body");
-                bodySpan.innerHTML = `${data[i].body}`;
-                messageDiv.appendChild(senderBold);
-                messageDiv.appendChild(bodySpan);
-                document.querySelector("#messages").appendChild(messageDiv);
-            }
-        });
-
-
-}
-
-
-setInterval(getMessages, 500);
+setInterval(sendMessage, 500);
