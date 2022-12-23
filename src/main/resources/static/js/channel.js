@@ -1,63 +1,73 @@
-const textarea = document.querySelector('#textarea');
-const channelId = sessionStorage.getItem("channelId");
-
-
 function initialSetup() {
-    if (sessionStorage.getItem("username") == null) {
+    const username = sessionStorage.getItem("username");
+    const channelId = sessionStorage.getItem("channelId");
+    if (!username || !channelId) {
         window.location.href = "../welcome";
     }
-
-    if (sessionStorage.getItem("channelId") == null) {
-        window.location.href = "../welcome";
-    }
-
 }
 
 initialSetup();
 
-function createMessageElements() {
-    const messageDiv = document.createElement("div");
-    messageDiv.setAttribute("class", "message");
-    const boldText = document.createElement("b");
-    boldText.setAttribute("class", "sender");
-    boldText.innerHTML = `${item.sender}: `;
-    const span = document.createElement("span");
-    span.setAttribute("class", "body");
-    span.innerHTML = `${item.body}`;
-    messageDiv.appendChild(boldText);
-    messageDiv.appendChild(span);
-    document.querySelector("#messages").appendChild(messageDiv);
 
-}
+const textarea = document.querySelector('#textarea');
+const messagesElement = document.querySelector("#messages");
+const channelId = sessionStorage.getItem("channelId");
 
-
-const sendMessage = textarea.onkeyup = event => {
-    const keyCode = event.keyCode
-    if (keyCode === "enter" || keyCode === "13") {
-        const username = sessionStorage.getItem("username");
-        const messageBody = textarea.value;
-        textarea.value = "";
-
-        const message = {
-            "sender": username,
-            "body": messageBody,
-            "channelId": channelId
-        };
-
-        fetch(`/channels/${channelId}/messages`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(message)
-        }).then((response) => response.json())
-            .then(data => {
-                document.querySelector("#messages").innerHTML = ``;
-
-                for (const item of data) {
-                    createMessageElements();
-                }
-            });
+textarea.addEventListener("keypress", (event) => {
+    if (event.keyCode === 13) {
+        sendMessage();
     }
+});
+
+function sendMessage() {
+    const username = sessionStorage.getItem("username");
+    const messageBody = textarea.value;
+    textarea.value = "";
+
+    const message = {
+        sender: username,
+        body: messageBody,
+        channelId: channelId
+    };
+
+    fetch(`/channels/${channelId}/messages`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+    }).then((response) => response.json())
+        .then((data) => {
+            displayMessages(data);
+        });
 }
-setInterval(sendMessage, 500);
+
+function displayMessages(messages) {
+    messagesElement.innerHTML = "";
+    messages.forEach((message) => {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+
+        const senderBold = document.createElement("b");
+        senderBold.classList.add("sender");
+        senderBold.textContent = `${message.sender}: `;
+
+        const bodySpan = document.createElement("span");
+        bodySpan.classList.add("body");
+        bodySpan.textContent = message.body;
+
+        messageDiv.appendChild(senderBold);
+        messageDiv.appendChild(bodySpan);
+        messagesElement.appendChild(messageDiv);
+    });
+}
+
+function getMessages() {
+    fetch(`/channels/${channelId}/messages`)
+        .then((response) => response.json())
+        .then((data) => {
+            displayMessages(data);
+        });
+}
+
+setInterval(getMessages, 500);
